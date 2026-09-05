@@ -1,3 +1,70 @@
-<!doctype html><html lang="uk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080a0f"><link rel="stylesheet" href="src/styles.css"><title>OpsAnalytics Demo</title></head><body>
-<section id="auth-view" class="auth-view"><div class="auth-card"><div class="brand-mark"><span></span><span></span><span></span></div><p class="eyebrow">PRIVATE ANALYTICS · DEMO</p><h1>Ops<span>Analytics</span></h1><p class="auth-subtitle">Тестовий доступ без Firebase</p><form id="login-form" class="auth-form"><label><span>Логін</span><input id="email" type="email" placeholder="admin" required></label><label><span>Пароль</span><input id="password" type="password" placeholder="Admin" required></label><button class="primary-btn" type="submit">Увійти до системи <b>→</b></button><p id="auth-error" class="form-message"></p></form><div class="security-note">ДЕМО-РЕЖИМ · Firebase не потрібен для перегляду</div></div></section>
-<section id="dashboard-view" class="dashboard-view hidden"><aside class="sidebar"><div class="app-brand"><div class="brand-mark small"><span></span><span></span><span></span></div><div><strong>OpsAnalytics</strong><small>Management Console</small></div></div><nav id="main-nav" class="main-nav"><button class="nav-item active" data-view="overview">⌂ <span>Огляд</span></button><button class="nav-item" data-view="processes">◈ <span>Процеси</span></button><button class="nav-item" data-view="employees">◎ <span>Працівники</span></button><button class="nav-item" data-view="reports">▥ <span>Звіти</span></button><button class="nav-item" data-view="settings">⚙ <span>Налаштування</span></button></nav><button id="logout-btn" class="logout-btn">↪ Вийти</button></aside><main class="main-content"><header class="topbar"><div class="breadcrumb">Analytics / <strong id="page-title">Огляд</strong></div><div class="user-chip"><div class="avatar">A</div><div><strong>Admin</strong><small>Administrator</small></div></div></header><div id="page-container" class="page-container"></div></main></section><script type="module" src="src/app.js"></script></body></html>
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#080a0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="src/styles.css">
+  <title>OpsAnalytics · Балансування</title>
+</head>
+<body>
+<section id="auth-view" class="auth-view">
+  <div class="auth-card">
+    <div class="brand-mark"><span></span><span></span><span></span></div>
+    <p class="eyebrow">PRIVATE OPERATIONS ANALYTICS · DEMO</p>
+    <h1>Ops<span>Analytics</span></h1>
+    <p class="auth-subtitle">Вхід у робочий простір процесу</p>
+    <form id="login-form" class="auth-form">
+      <label><span>Email</span><input id="email" type="email" inputmode="email" autocomplete="username" placeholder="balancing.manager@demo.local" required></label>
+      <label><span>Пароль</span><input id="password" type="password" autocomplete="current-password" placeholder="••••••••••" required></label>
+      <button class="primary-btn" type="submit">Увійти до системи <b>→</b></button>
+      <p id="auth-error" class="form-message"></p>
+    </form>
+    <div class="demo-access">
+      <div class="demo-access-head"><span>ДЕМО-ДОСТУП</span><small>тимчасові дані</small></div>
+      <div class="credential-row"><span>Керівник процесу</span><strong>balancing.manager@demo.local</strong></div>
+      <div class="credential-row"><span>Пароль</span><strong>Balance2026!</strong></div>
+      <p>Дані тестові. Реальні Firebase-акаунти підключимо окремо.</p>
+    </div>
+    <div class="security-note">DEMO-РЕЖИМ · Firebase не потрібен для перегляду</div>
+  </div>
+</section>
+
+<section id="dashboard-view" class="dashboard-view hidden">
+  <aside id="sidebar" class="sidebar">
+    <div class="app-brand">
+      <div class="brand-mark small"><span></span><span></span><span></span></div>
+      <div><strong>OpsAnalytics</strong><small>Operations Console</small></div>
+    </div>
+    <div class="scope-card">
+      <span class="scope-dot"></span>
+      <div><small>Ваш процес</small><strong>Балансування</strong></div>
+    </div>
+    <nav id="main-nav" class="main-nav" aria-label="Основна навігація">
+      <button class="nav-item active" data-view="process"><span class="nav-icon">◈</span><span>Процес</span></button>
+      <button class="nav-item" data-view="employees"><span class="nav-icon">◎</span><span>Працівники</span></button>
+      <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span><span>Налаштування</span></button>
+    </nav>
+    <button id="logout-btn" class="logout-btn"><span>↪</span> Вийти</button>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="sidebar-toggle" class="icon-btn" aria-label="Відкрити меню">☰</button>
+        <div class="breadcrumb"><span>Процеси</span><b>/</b><strong id="page-title">Балансування</strong></div>
+      </div>
+      <div class="topbar-right">
+        <div class="shift-chip"><span class="live-dot"></span><div><strong>Денна зміна</strong><small id="current-date">05 вересня 2026</small></div></div>
+        <div class="user-chip"><div class="avatar">Б</div><div><strong>Керівник процесу</strong><small>Балансування</small></div></div>
+      </div>
+    </header>
+
+    <div id="page-container" class="page-container"></div>
+  </main>
+  <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+</section>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

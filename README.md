@@ -1,147 +1,48 @@
-# OpsAnalytics PWA
+# OpsAnalytics PWA — Process Manager DEMO
 
-Готова фронтенд-основа для закритого PWA-застосунку управлінської аналітики.
+Ця версія є першим UI-кроком за проектною документацією: **робочий простір керівника процесу «Балансування»**.
 
-## Що вже є
+## Що реалізовано
 
-- обов'язкова авторизація через Firebase Authentication;
-- перевірка ролі через `users/{uid}`;
-- темний адаптивний UI для desktop / tablet / mobile;
-- нижня логічна структура розділів: Огляд, Процеси, Працівники, Звіти, Налаштування;
-- KPI-картки;
-- заготовки графіків;
-- таблиці процесів;
-- рейтинг працівників;
-- фільтри та вибір місяця;
-- PWA manifest + service worker;
-- окремий Firebase/Firestore repository layer;
-- Firestore Security Rules з role-based access;
-- Firestore indexes для майбутніх запитів;
-- структура, яку можна розширювати новими процесами без переписування UI.
+- Mobile-first екран процесу.
+- На мобільному: меню відкривається через кнопку у header; підготовлена структура для подальшої bottom navigation без горизонтального скролу сторінки.
+- На десктопі: постійний sidebar.
+- Горизонтальний скрол дозволений тільки всередині таблиці працівників, де він реально потрібен.
+- Заборонений pinch-to-zoom на мобільних пристроях.
+- План / факт за поточну зміну.
+- Статус процесу.
+- Поточне замовлення та прогрес.
+- Пульс виробництва за годинами.
+- Активні замовлення за номерами деталей.
+- Рейтинг працівників за КПД.
+- Окремі заготовки «Працівники» та «Налаштування» в межах доступу керівника процесу.
+- Демо-логін без Firebase.
 
-## Важливо перед запуском
+## Демо-доступи
 
-1. Створіть Firebase Web App.
-2. Увімкніть Firebase Authentication → Email/Password.
-3. Створіть Firestore Database.
-4. Скопіюйте Web App config у `src/firebase-config.js`.
-5. Опублікуйте `firestore.rules`.
-6. Створіть документи користувачів у `users/{uid}`.
+Усі тимчасові логіни винесені в окремий файл **DEMO-CREDENTIALS.md**.
 
-Приклад `users/{uid}`:
+Основний тестовий доступ:
 
-```json
-{
-  "name": "Ім'я Прізвище",
-  "role": "director",
-  "active": true
-}
-```
+- Email: `balancing.manager@demo.local`
+- Password: `Balance2026!`
 
-Доступні ролі у стартовій версії:
-- `admin`
-- `director`
-- `manager`
-- `analyst`
+Також збережений технічний демо-доступ:
 
-`viewer` зарезервований у UI, але навмисно не допускається в поточний dashboard guard, доки не буде визначено його права.
+- Login: `Admin`
+- Password: `Admin`
 
-## Рекомендована модель Firestore
+## Важливо про дані
 
-### users/{uid}
-```text
-name
-role
-active
-managerId
-departmentIds[]
-createdAt
-```
+Показники на екрані є демонстраційними. Їх структура вже підготовлена під майбутні поля Firestore, але зараз жодних реальних виробничих даних немає.
 
-### employees/{employeeId}
-```text
-name
-active
-processIds[]
-managerId
-departmentId
-```
+## Наступний крок
 
-### processes/{processId}
-```text
-name
-code
-active
-sortOrder
-managerIds[]
-metricKeys[]
-```
+Після затвердження цього екрана можна окремо реалізувати:
 
-### analyticsMonthly/{YYYY-MM}
-Агрегований snapshot для головної сторінки:
-```text
-processed
-completed
-efficiency
-avgTime
-byProcess
-byManager
-trend[]
-updatedAt
-```
-
-### processMetrics/{autoId}
-```text
-processId
-period
-managerId
-processed
-completed
-efficiency
-avgTime
-sla
-errorRate
-trend[]
-```
-
-### employeeMetrics/{autoId}
-```text
-employeeId
-period
-managerId
-processId
-processed
-completed
-efficiency
-avgTime
-qualityScore
-```
-
-## Чому аналітику краще зберігати агреговано
-
-Не варто будувати весь dashboard шляхом читання тисяч сирих операцій за місяць. Для швидкого dashboard краще мати сирі події/операції окремо та щомісячні агрегати окремо. Тоді головна сторінка читає невелику кількість документів, а деталізація відкриває потрібний рівень.
-
-Для міграції з Realtime Database можна окремо зробити ETL/migration script, який:
-1. читає стару RTDB;
-2. нормалізує записи;
-3. додає стабільні IDs;
-4. записує сирі дані у Firestore;
-5. будує місячні агрегати;
-6. перевіряє кількість записів до/після.
-
-## Запуск локально
-
-Це звичайний static PWA без обов'язкового build step.
-
-```bash
-python3 -m http.server 8080
-```
-
-Потім відкрийте:
-`http://localhost:8080`
-
-Для GitHub Pages структура вже підходить.
-
-## Наступний етап
-
-Після того як буде відома фактична структура RTDB, repository layer можна під'єднати до реальних даних без переробки основного UI. Наступний логічний модуль: migration script + точна Firestore schema + агрегатор по місяцю/працівнику/керівнику + реальні графіки.
+1. картку працівника;
+2. повну сторінку «Працівники»;
+3. bottom navigation для мобільної версії;
+4. роль керівника ланки;
+5. керівника зміни та глибоку аналітику;
+6. підключення Firestore замість demo-даних.
