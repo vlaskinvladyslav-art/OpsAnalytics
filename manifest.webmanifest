@@ -1,0 +1,13 @@
+{
+  "name": "OpsAnalytics",
+  "short_name": "OpsAnalytics",
+  "description": "Закрита аналітична панель для керівництва",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#080a0f",
+  "theme_color": "#0b0e13",
+  "lang": "uk",
+  "icons": [
+    { "src": "./public/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

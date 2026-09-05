@@ -1,0 +1,21 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "processMetrics",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "processId", "order": "ASCENDING" },
+        { "fieldPath": "period", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "employeeMetrics",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "employeeId", "order": "ASCENDING" },
+        { "fieldPath": "period", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

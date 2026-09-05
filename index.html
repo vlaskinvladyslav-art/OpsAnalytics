@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e13">
+  <meta name="description" content="Закрита аналітична панель для керівництва">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./src/styles.css">
+  <title>Ops Analytics</title>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <section id="auth-view" class="auth-view">
+      <div class="auth-orbit orbit-one"></div>
+      <div class="auth-orbit orbit-two"></div>
+      <div class="auth-card">
+        <div class="brand-mark"><span></span><span></span><span></span></div>
+        <p class="eyebrow">PRIVATE ANALYTICS</p>
+        <h1>Ops<span>Analytics</span></h1>
+        <p class="auth-subtitle">Закрита панель оперативної аналітики</p>
+
+        <form id="login-form" class="auth-form" autocomplete="on">
+          <label>
+            <span>Email</span>
+            <input id="email" name="email" type="email" placeholder="name@company.com" required autocomplete="username">
+          </label>
+          <label>
+            <span>Пароль</span>
+            <input id="password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+          </label>
+          <button class="primary-btn" type="submit">
+            <span>Увійти до системи</span><b>→</b>
+          </button>
+          <button id="forgot-password" class="text-btn" type="button">Відновити пароль</button>
+          <p id="auth-error" class="form-message" aria-live="polite"></p>
+        </form>
+
+        <div class="security-note">
+          <span class="lock-dot">●</span>
+          Доступ контролюється Firebase Authentication + Firestore Rules
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard-view" class="dashboard-view hidden">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="app-brand">
+            <div class="brand-mark small"><span></span><span></span><span></span></div>
+            <div><strong>OpsAnalytics</strong><small>Management Console</small></div>
+          </div>
+          <button id="sidebar-collapse" class="icon-btn" title="Згорнути меню">⌁</button>
+        </div>
+
+        <nav id="main-nav" class="main-nav" aria-label="Основна навігація">
+          <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span><span>Огляд</span></button>
+          <button class="nav-item" data-view="processes"><span class="nav-icon">◈</span><span>Процеси</span></button>
+          <button class="nav-item" data-view="employees"><span class="nav-icon">◎</span><span>Працівники</span></button>
+          <button class="nav-item" data-view="reports"><span class="nav-icon">▥</span><span>Звіти</span></button>
+          <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span><span>Налаштування</span></button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="system-status"><i></i><span>Firebase connected</span></div>
+          <button id="logout-btn" class="logout-btn"><span>↪</span> Вийти</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button id="mobile-menu" class="mobile-menu icon-btn">☰</button>
+          <div class="breadcrumb"><span>Analytics</span><b>/</b><strong id="page-title">Огляд</strong></div>
+          <div class="topbar-actions">
+            <button id="refresh-btn" class="icon-btn" title="Оновити дані">↻</button>
+            <div class="user-chip">
+              <div class="avatar" id="user-avatar">U</div>
+              <div><strong id="user-name">Користувач</strong><small id="user-role">Manager</small></div>
+            </div>
+          </div>
+        </header>
+
+        <div id="page-container" class="page-container"></div>
+      </main>
+    </section>
+
+    <div id="toast" class="toast" role="status"></div>
+    <div id="loading" class="loading-overlay hidden"><div class="loader"></div></div>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
