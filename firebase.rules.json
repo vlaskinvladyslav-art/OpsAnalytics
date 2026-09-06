@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        "profile": {
+          ".read": "auth.uid === $uid || auth.token.email === 'vlaskin.vladyslav@gmail.com'",
+          "name": { ".write": "auth.uid === $uid" },
+          "email": { ".write": "auth.uid === $uid" },
+          "firstSeen": { ".write": "auth.uid === $uid" },
+          "lastSeen": { ".write": "auth.uid === $uid" },
+          "brigade": { ".write": "auth.uid === $uid" },
+          "shiftType": { ".write": "auth.uid === $uid" },
+          "blocked": { ".write": "auth.token.email === 'vlaskin.vladyslav@gmail.com'" }
+        },
+        "data": {
+          ".read": "auth.uid === $uid && (root.child('users').child($uid).child('profile/blocked').val() !== true || auth.token.email === 'vlaskin.vladyslav@gmail.com')",
+          ".write": "auth.uid === $uid && (root.child('users').child($uid).child('profile/blocked').val() !== true || auth.token.email === 'vlaskin.vladyslav@gmail.com')"
+        }
+      }
+    }
+  }
+}
